@@ -1,5 +1,6 @@
 application.properties
 .mvn/*
+.DS_Store
 
 HELP.md
 target/
