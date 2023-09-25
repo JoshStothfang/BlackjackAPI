@@ -1,6 +1,6 @@
 package bootcamp.java.blackjack.spring.models.player;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +31,7 @@ public class Player {
 	private double wallet = 0;
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateCreated;
+	private LocalDateTime dateCreated = LocalDateTime.now();
 	@Column(columnDefinition="decimal(11,2) not null")
 	private double winnings = 0;
 	
@@ -72,10 +72,10 @@ public class Player {
 	public void setWallet(double wallet) {
 		this.wallet = wallet;
 	}
-	public Date getDateCreated() {
+	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	public double getWinnings() {

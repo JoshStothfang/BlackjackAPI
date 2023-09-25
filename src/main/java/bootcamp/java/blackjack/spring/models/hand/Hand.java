@@ -1,6 +1,6 @@
 package bootcamp.java.blackjack.spring.models.hand;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import bootcamp.java.blackjack.spring.models.player.Player;
 import jakarta.persistence.Column;
@@ -31,7 +31,7 @@ public class Hand {
 	private double amountWon = 0; // Doesn't include initial bet
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date date;
+	private LocalDateTime dateTime = LocalDateTime.now();
 	@ManyToOne(optional=false)
 	@JoinColumn(name="playerId")
 	private Player player;
@@ -74,11 +74,11 @@ public class Hand {
 	public void setAmountWon(double amountWon) {
 		this.amountWon = amountWon;
 	}
-	public Date getDate() {
-		return date;
+	public LocalDateTime getDateTime() {
+		return dateTime;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
 	}
 	public Player getPlayer() {
 		return player;
