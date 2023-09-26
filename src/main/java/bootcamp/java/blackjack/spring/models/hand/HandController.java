@@ -28,6 +28,7 @@ public class HandController {
 	@Autowired
 	private PlayerRepository playerRepo;
 	
+<<<<<<< HEAD
 	    private void updatePlayerWinnings(Hand hand) throws Exception {
 	        Player player = playerRepo.findById(hand.getPlayer().getId()).get();
 	        // If getWinLoss() is a WIN it adds the players wallet and the players total winnings
@@ -60,6 +61,31 @@ public class HandController {
 			 */
 	    }
 	
+=======
+	private void updatePlayerWinnings(Hand hand) throws Exception {
+		Player player = playerRepo.findById(hand.getPlayer().getId()).get();
+	    // If getWinLoss() is a WIN it adds the players wallet and the players total winnings
+	    if (hand.getWinLoss().equals("WIN")) {
+	        double wallet = player.getWallet() + hand.getAmountWon();
+	        double winnings = player.getWinnings() + hand.getAmountWon();
+	        player.setWinnings(winnings);
+	        player.setWallet(wallet);
+	        playerRepo.save(player);
+        }
+	    // If getWinLoss() is LOSS it subtracts the players wallet and the players total winnings
+        else if (hand.getWinLoss().equals("LOSS")) {
+        	double wallet = player.getWallet() - hand.getInitialBet();
+            double winnings = player.getWinnings() - hand.getInitialBet();
+            player.setWinnings(winnings);
+            player.setWallet(wallet);
+            playerRepo.save(player);
+        }
+        // CHECKS getWinLoss is either "WIN" or "LOSS" and if it isn't it throws and exception
+        else {
+        	throw new Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' ");
+        }
+    }
+>>>>>>> 61b4604ada1275c73748b4ca0e5853ecd9611e99
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Hand>> getHands() {
@@ -81,15 +107,14 @@ public class HandController {
 		
 	}
 
-	
 	@PostMapping 
 	public ResponseEntity<Hand> PostHand(@RequestBody Hand hand) throws Exception {
-	        if (hand.getId() != 0) {
-	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	        }
-	        Hand savedHand = handRepo.save(hand);
-	        updatePlayerWinnings(hand);
-	        return new ResponseEntity<>(savedHand, HttpStatus.CREATED); 
+        if (hand.getId() != 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        handRepo.save(hand);
+        updatePlayerWinnings(hand);
+        return new ResponseEntity<>(hand, HttpStatus.CREATED); 
 	    
 	}
 	@SuppressWarnings("rawtypes")
@@ -99,9 +124,8 @@ public class HandController {
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		handRepo.save(hand);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
-	
 	
 	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
