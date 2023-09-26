@@ -33,8 +33,15 @@ public class HandController {
 	        // If getWinLoss() is a WIN it adds the players wallet and the players total winnings
 	        if (hand.getWinLoss() == "WIN") {
 	            double wallet = player.getWallet() + hand.getAmountWon();
+	            System.out.println("Get Player Wallet: " + player.getWallet());
+	            System.out.println("Get Hand Amount: " + hand.getAmountWon());
+	            
 	            double winnings = player.getWinnings() + hand.getAmountWon();
+	            System.out.println("Get Player Winnings: " + player.getWinnings());
+	            System.out.println("Get Player Amount Won: " + hand.getAmountWon());
 	            player.setWinnings(winnings);
+	            System.out.println("Wallet: " + wallet);
+	            System.out.println("Winnings: ");
 	            player.setWallet(wallet);
 	            playerRepo.save(player);
 	        }
@@ -47,9 +54,10 @@ public class HandController {
 	            playerRepo.save(player);
 	        }
 	        // CHECKS getWinLoss is either "WIN" or "LOSS" and if it isn't it throws and exception
-	        if(hand.getWinLoss() != "WIN" || hand.getWinLoss() != "LOSS") {
-	        	throw new Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' ");
-	        }
+			/*
+			 * if(hand.getWinLoss() != "WIN" && hand.getWinLoss() != "LOSS") { throw new
+			 * Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' "); }
+			 */
 	    }
 	
 	

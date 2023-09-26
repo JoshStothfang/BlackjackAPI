@@ -44,7 +44,7 @@ public class PlayerController {
 		
 	}
 	
-	@GetMapping("{userrname}/{password}")
+	@GetMapping("{username}/{password}")
 	public ResponseEntity<Player> PlayerLogin(@PathVariable String username, @PathVariable String password){
 		Optional<Player> player = playerRepo.findPlayerByUsernameAndPassword(username, password);
 		if(player.isEmpty()) {
