@@ -51,6 +51,7 @@ public class HandController {
         	throw new Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' ");
         }
     }
+
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Hand>> getHands() {
