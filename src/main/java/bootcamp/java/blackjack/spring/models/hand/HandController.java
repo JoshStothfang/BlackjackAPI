@@ -28,40 +28,6 @@ public class HandController {
 	@Autowired
 	private PlayerRepository playerRepo;
 	
-<<<<<<< HEAD
-	    private void updatePlayerWinnings(Hand hand) throws Exception {
-	        Player player = playerRepo.findById(hand.getPlayer().getId()).get();
-	        // If getWinLoss() is a WIN it adds the players wallet and the players total winnings
-	        if (hand.getWinLoss() == "WIN") {
-	            double wallet = player.getWallet() + hand.getAmountWon();
-	            System.out.println("Get Player Wallet: " + player.getWallet());
-	            System.out.println("Get Hand Amount: " + hand.getAmountWon());
-	            
-	            double winnings = player.getWinnings() + hand.getAmountWon();
-	            System.out.println("Get Player Winnings: " + player.getWinnings());
-	            System.out.println("Get Player Amount Won: " + hand.getAmountWon());
-	            player.setWinnings(winnings);
-	            System.out.println("Wallet: " + wallet);
-	            System.out.println("Winnings: ");
-	            player.setWallet(wallet);
-	            playerRepo.save(player);
-	        }
-	        // If getWinLoss() is LOSS it subtracts the players wallet and the players total winnings
-	        if(hand.getWinLoss() == "LOSS") {
-	        	double wallet = player.getWallet() - hand.getInitialBet();
-	            double winnings = player.getWinnings() - hand.getInitialBet();
-	            player.setWinnings(winnings);
-	            player.setWallet(wallet);
-	            playerRepo.save(player);
-	        }
-	        // CHECKS getWinLoss is either "WIN" or "LOSS" and if it isn't it throws and exception
-			/*
-			 * if(hand.getWinLoss() != "WIN" && hand.getWinLoss() != "LOSS") { throw new
-			 * Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' "); }
-			 */
-	    }
-	
-=======
 	private void updatePlayerWinnings(Hand hand) throws Exception {
 		Player player = playerRepo.findById(hand.getPlayer().getId()).get();
 	    // If getWinLoss() is a WIN it adds the players wallet and the players total winnings
@@ -85,7 +51,7 @@ public class HandController {
         	throw new Exception("Invalid MUST INPUT EITHER 'WIN' OR 'LOSS' ");
         }
     }
->>>>>>> 61b4604ada1275c73748b4ca0e5853ecd9611e99
+
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Hand>> getHands() {

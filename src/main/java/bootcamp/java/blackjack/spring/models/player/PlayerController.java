@@ -58,16 +58,12 @@ public class PlayerController {
 	
 	@PostMapping 
 	public ResponseEntity<Player> PostPlayer(@RequestBody Player player) {
-	    try {
 	        if (player.getId() != 0) {
 	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	        }
 	        Player savedPlayer = playerRepo.save(player);
 	        return new ResponseEntity<>(savedPlayer, HttpStatus.CREATED); 
-	    } catch (Exception e) {
-	        e.printStackTrace(); // Log the exception for debugging
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+
 	}
 	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}") 
